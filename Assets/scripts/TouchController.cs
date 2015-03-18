@@ -10,35 +10,43 @@ public Transform testTransform;
 
 private Rigidbody missileRB;
 private GameObject sphere;
-
+private Vector3 missileStartPos;
+	private Vector3 missileStartRot;
 	// Use this for initialization
 	void Start () 
 	{
 		status.text="init";
 		 sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+		missileStartPos = new Vector3(-17.3f,0.0f,0.0f);
+		missileStartRot = new Vector3(0.0f,90.0f,0.0f);
+		
 	}
 	
 	// Update is called once per frame
-	
+	void firemissile()
+	{
+		status.text="clicked";
+		Quaternion mrot = Quaternion.Euler(missileStartRot);
+		Vector3 mpos = new Vector3(missileStartPos.x,missileStartPos.y,plane.transform.position.z);
+		GameObject missileClone =(GameObject) Instantiate(missile,mpos,mrot);
+		
+		
+		
+	}
 	void Update () 
 	{
 		if(Input.GetMouseButtonDown(0))
 		{
-			status.text="clicked";
-			GameObject missileClone =(GameObject) Instantiate(missile,testTransform.position,transform.rotation);
-			Debug.DrawLine(missileClone.transform.position,plane.transform.position,Color.green,100.0f);
+			
+			firemissile();
+			
 		}
 		if(Input.touchCount>0)
 		{
 			Touch touch = Input.GetTouch(0);
 			if(touch.phase==TouchPhase.Began)
 			{
-				status.text="\ntouched";
-				Rigidbody missileClone =(Rigidbody) Instantiate(missile,testTransform.position,transform.rotation);
-				//missileClone.velocity= Vector3.forward * 10;
-				
-			//	GameObject sphereClone = (GameObject) Instantiate(sphere,testTransform.position,transform.rotation);
-			//	sphereClone.transform.Translate(Vector3.forward*30.0f);
+				firemissile();
 				
 				
 				
@@ -52,8 +60,5 @@ private GameObject sphere;
 			
 		}
 	}
-	void FireMissile()
-	{
 	
-	}
 }
