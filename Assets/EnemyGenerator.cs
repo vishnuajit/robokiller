@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
+
+
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyGenerator : MonoBehaviour {
 
 	private float currentTime;
+	
+	
 	// Use this for initialization
 	void Start () {
 		currentTime = 0.0f;
@@ -25,6 +30,10 @@ public class EnemyGenerator : MonoBehaviour {
 	}
 	void generateEnemy()
 	{
-		GameObject enemy = (GameObject)Instantiate(GameObject.Find ("Enemy"),Vector3.zero,Quaternion.identity);
+		//GameObject enemy = (GameObject)Instantiate(GameObject.Find ("Enemy"),Vector3.zero,Quaternion.identity);
+		GameObject enemyplane = (GameObject) Instantiate(Resources.Load("EnemyPlane"));
+		
+		
+		
 	}
 }
